@@ -11,7 +11,6 @@ class Task:
     def mark_completed(self):
         self.completed = True
 
-    # Convert task to dictionary for saving to JSON
     def to_dict(self):
         return {
             'title': self.title,
@@ -23,7 +22,6 @@ class Task:
 def save_tasks(tasks):
     """Saves the list of Task objects to a JSON file."""
     with open('tasks.json', 'w') as f:
-        # Convert list of objects to list of dicts
         json.dump([task.to_dict() for task in tasks], f, indent=4)
     print("Data saved successfully.")
 
@@ -32,10 +30,8 @@ def load_tasks():
     try:
         with open('tasks.json', 'r') as f:
             data = json.load(f)
-            # Convert list of dicts back to list of objects
             return [Task(**item) for item in data]
     except (FileNotFoundError, json.JSONDecodeError):
-        # Return empty list if file doesn't exist or is empty
         return []
 
 def add_task(tasks):
@@ -55,7 +51,6 @@ def view_tasks(tasks):
         print("No tasks found.")
         return
 
-    # Print header
     print(f"{'ID':<4} {'Title':<20} {'Category':<10} {'Status':<10} {'Description'}")
     print("-" * 60)
 
